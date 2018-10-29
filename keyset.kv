@@ -1,0 +1,154 @@
+
+<Keyset>:
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            orientation:'horizontal'
+            size_hint: (None,None)
+            height: 32
+            ReadyDisplay:
+                id: ready_display
+                size_hint: (None,None)
+                center_x: root.width / 2 + 50
+                width: root.width - 190
+                height: 30
+                val: int(0)
+                text: ''
+            Button:
+                text: 'ascii chart'
+                size_hint: (None,None)
+                width: 120
+                height: 30
+                on_press:
+                    root.manager.transition.direction = 'left'
+                    root.manager.current = 'ascii'
+            Button:
+                text: 'Quit'
+                on_press: app.get_running_app().stop()
+                #center_x: self.x + self.width / 2.1
+                size_hint: (None,None)
+                width: 60
+                height: 30
+            Label:
+                size_hint: (None,None)
+                width: 5
+                height: 30
+
+        BoxLayout:
+            orientation:'horizontal'
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: (.286,1)
+                BoxLayout:
+                    size_hint: (1,.12)
+                    orientation:'horizontal'
+                    PressKey:
+                        text: "Esc" # ASCII val 27
+                        val: 27
+                        flash_text: "<esc>"
+                        background_color: .3,.3,.3,1 # dark grey
+                        ready_display: ready_display.__self__
+                    PressKey:
+                        text: "`" # ASCII val 96
+                        val: 96
+                        flash_text: "< ` grave accent>"
+                        background_color: .3,.3,.3,1 # dark grey
+                        ready_display: ready_display.__self__
+                    PressKey:
+                        text: "Tab" # HT or Horizontal Tab ASCII val 9
+                        val: 9
+                        flash_text: "<tab>"
+                        background_color: .3,.3,.3,1 # dark grey
+                        ready_display: ready_display.__self__
+                    PressKey:
+                        text: "@" # ASCII val 64
+                        val: 64
+                        flash_text: "@"
+                        background_color: .3,.3,.3,1 # dark grey
+                        ready_display: ready_display.__self__
+                FingerKey:
+                    size_hint: (1,.76)
+                    val: 16
+                    text: str(self.val)
+                    background_color: .7,0,0,1 # red
+                    background_down: ''
+                    ready_display: ready_display.__self__
+                BoxLayout:
+                    size_hint: (1,.12)
+                    orientation:'horizontal'
+                    ModKey:
+                        group: "mod"
+                        val: 32
+                        text: "  Shift  "
+                        background_color: 0,1,0,1 # green
+                        ready_display: ready_display.__self__
+                    ModKey:
+                        group: "mod"
+                        val: 64
+                        text: "  Num  "
+                        background_color: 0,0,1,1 # blue
+                        ready_display: ready_display.__self__
+            FingerKey:
+                val: 8
+                size_hint: (.143,1)
+                text: str(self.val)
+                background_color: .7,0.35,0,1 # orange
+                background_down: ''
+                ready_display: ready_display.__self__
+            FingerKey:
+                val: 4
+                size_hint: (.143,1)
+                text: str(self.val)
+                background_color: .7,.7,0,1 # yellow
+                background_down: ''
+                ready_display: ready_display.__self__
+            FingerKey:
+                val: 2
+                size_hint: (.143,1)
+                text: str(self.val)
+                background_color: 0,1,0,1 # green
+                ready_display: ready_display.__self__
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: (.286,1)
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: (1,.22)
+                    PressKey:
+                        text: "Backspace" # BS ASCII val 08, not DEL ASCII 127
+                        val: 8
+                        flash_text: "<bs>"
+                        background_color: .3,.3,.3,1 # dark grey
+                        ready_display: ready_display.__self__
+                    PressKey:
+                        text: "Enter" # CR ASCII val 13
+                        val: 13
+                        flash_text: "<cr>"
+                        background_color: .3,.3,.3,1 # dark grey
+                        ready_display: ready_display.__self__
+                FingerKey:
+                    val: 1
+                    size_hint: (1,.56)
+                    text: str(self.val)
+                    background_color: 0,0,1,1 # blue
+                    ready_display: ready_display.__self__
+                PressKey:
+                    size_hint: (1,.22)
+                    text: " " # space ASCII val 34
+                    val: 34
+                    flash_text: "<space>"
+                    background_color: .3,.3,.3,1 # dark grey
+                    ready_display: ready_display.__self__
+
+<AsciiScreen>:
+    BoxLayout:
+        Button:
+            text: 'Ascii'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'keysetscr'
+            Image:
+                source: 'us-ascii_code_chart.png'
+                allow_stretch: True
+                size: root.width, root.height
+
